@@ -1,0 +1,30 @@
+{
+  "id": "e80b9418-af62-40ae-91fb-1b4089350e74",
+  "parent_ids": [
+    "82ac4b22-96b8-48e8-8d4b-b9508784d16e"
+  ],
+  "generation": 2,
+  "genome": {
+    "model_family": "small_transformer",
+    "num_layers": 4,
+    "hidden_dimension": 128,
+    "optimizer": "adamw",
+    "learning_rate": 0.0005,
+    "batch_size": 32,
+    "memory_policy": "none",
+    "retrieval_policy": "none",
+    "curriculum_strategy": "hard_examples_first",
+    "loss_weighting": {
+      "ce_loss": 1.0
+    },
+    "routing_graph": null
+  },
+  "fitness_score": 0.417069500387014,
+  "metrics": {
+    "math_accuracy": 0.5785750326946691,
+    "train_loss": 0.35712172298078515
+  },
+  "run_history": [],
+  "artifacts": {},
+  "status": "evaluated"
+}

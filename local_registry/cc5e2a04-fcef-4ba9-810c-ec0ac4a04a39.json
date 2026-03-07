@@ -1,0 +1,27 @@
+{
+  "id": "cc5e2a04-fcef-4ba9-810c-ec0ac4a04a39",
+  "parent_ids": [
+    "e80b9418-af62-40ae-91fb-1b4089350e74"
+  ],
+  "generation": 3,
+  "genome": {
+    "model_family": "small_transformer",
+    "num_layers": 4,
+    "hidden_dimension": 128,
+    "optimizer": "adamw",
+    "learning_rate": 0.0005,
+    "batch_size": 32,
+    "memory_policy": "none",
+    "retrieval_policy": "none",
+    "curriculum_strategy": "hard_examples_first",
+    "loss_weighting": {
+      "ce_loss": 1.0
+    },
+    "routing_graph": null
+  },
+  "fitness_score": null,
+  "metrics": {},
+  "run_history": [],
+  "artifacts": {},
+  "status": "proposed"
+}
