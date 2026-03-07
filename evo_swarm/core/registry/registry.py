@@ -21,3 +21,9 @@ class Registry(ABC):
     @abstractmethod
     def get_best_candidates(self, limit: int = 5) -> List[Candidate]:
         pass
+
+    @abstractmethod
+    def get_lineage_tree(self, candidate_id: str) -> List[Candidate]:
+        """Return the full ancestry chain from the given candidate back to the root."""
+        pass
+

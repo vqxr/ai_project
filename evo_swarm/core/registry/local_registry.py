@@ -51,3 +51,8 @@ class LocalRegistry(Registry):
         # Sort by fitness score descending
         all_candidates.sort(key=lambda c: c.fitness_score, reverse=True)
         return all_candidates[:limit]
+
+    def get_lineage_tree(self, candidate_id: str) -> List[Candidate]:
+        """Not implemented for the JSON-file registry."""
+        return []
+

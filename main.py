@@ -2,7 +2,7 @@ import sys
 import threading
 import time
 from evo_swarm.core.scheduler.local_scheduler import LocalEventScheduler
-from evo_swarm.core.registry.local_registry import LocalRegistry
+from evo_swarm.core.registry.sqlite_registry import SqliteRegistry
 from evo_swarm.agents.architect import ArchitectAgent
 from evo_swarm.agents.trainer import TrainerAgent
 from evo_swarm.agents.evaluator import EvaluatorAgent
@@ -14,7 +14,7 @@ def main():
     print("Initializing Evo Swarm...")
     
     # 1. Setup Core Infrastructure
-    registry = LocalRegistry(storage_dir="local_registry")
+    registry = SqliteRegistry(db_path="evo_swarm.db")
     scheduler = LocalEventScheduler()
     
     # 2. Initialize Agents
@@ -64,11 +64,23 @@ def main():
     if not best:
         print("No candidates were fully evaluated.")
     else:
-        print(f"Top Candidate: {best[0].id[:8]}")
-        print(f"Fitness: {best[0].fitness_score:.4f}")
-        print(f"Generation: {best[0].generation}")
-        print(f"Lineage depth (parents): {len(best[0].parent_ids)}")
-        print(f"Model Genotype: layers={best[0].genome.num_layers}, lr={best[0].genome.learning_rate}")
+        champion = best[0]
+        print(f"Top Candidate: {champion.id[:8]}")
+        print(f"Fitness: {champion.fitness_score:.4f}")
+        print(f"Generation: {champion.generation}")
+        print(f"Lineage depth (parents): {len(champion.parent_ids)}")
+        print(f"Model Genotype: layers={champion.genome.num_layers}, lr={champion.genome.learning_rate}")
+        
+        # Show ancestry chain from the SQLite lineage table
+        lineage = registry.get_lineage_tree(champion.id)
+        if len(lineage) > 1:
+            print(f"\n--- Ancestry Chain ({len(lineage)} nodes) ---")
+            for i, ancestor in enumerate(lineage):
+                prefix = "└─" if i == len(lineage) - 1 else "├─"
+                score = f"{ancestor.fitness_score:.4f}" if ancestor.fitness_score else "N/A"
+                print(f"  {prefix} Gen {ancestor.generation} | {ancestor.id[:8]} | fitness={score}")
+    
+    registry.close()
 
 if __name__ == "__main__":
     main()
