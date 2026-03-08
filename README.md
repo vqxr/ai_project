@@ -621,3 +621,29 @@ Version 1 should:
 - store lineage and artifacts
 - be modular enough to expand later
 - be built like a city, not a monster
+
+---
+
+## Offline Swarm (Papers + Tools)
+This repo now also includes a practical, laptop-friendly offline runtime under `evo_swarm/offline/`.
+
+What it does today:
+- ingest local text papers (`.txt/.md/.rst/.tex`) into a SQLite+FTS index (fully offline)
+- retrieve relevant chunks for a question (BM25 via SQLite FTS5)
+- run a 5-role loop (Curator/Architect/Executor/Evaluator/Critic) using a single pluggable local LLM backend
+
+### Quickstart
+Ingest a folder:
+```bash
+./venv/bin/python -m evo_swarm.offline.cli ingest ./papers
+```
+
+Ask a question (works without a model; uses an echo backend by default):
+```bash
+./venv/bin/python -m evo_swarm.offline.cli ask "Summarize the threat model assumptions across the papers."
+```
+
+Use a local llama.cpp server (optional):
+```bash
+./venv/bin/python -m evo_swarm.offline.cli --llm-backend llama.cpp --llm-url http://127.0.0.1:8080 ask "..."
+```

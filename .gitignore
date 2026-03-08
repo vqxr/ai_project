@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Local artifacts
+evo_swarm.db
+local_registry/
+*.sqlite
+*.sqlite3
+
+# Mac
+.DS_Store
+
