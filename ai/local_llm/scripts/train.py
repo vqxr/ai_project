@@ -6,11 +6,10 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from tokenizers import Tokenizer
-from tqdm import tqdm
-
 from data import MemmapDataset, get_batch
 from model import GPT, GPTConfig
+from tokenizers import Tokenizer
+from tqdm import tqdm
 
 
 def pick_device():

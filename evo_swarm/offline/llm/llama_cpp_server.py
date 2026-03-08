@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import urllib.request
-from typing import Optional
 
 from evo_swarm.offline.llm.base import LocalLLM
 

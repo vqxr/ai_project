@@ -4,7 +4,7 @@ import os
 import shlex
 import subprocess
 from dataclasses import dataclass
-from typing import Any, Callable, Optional
+from typing import Any
 
 from evo_swarm.offline.config import OfflineSwarmConfig
 from evo_swarm.offline.knowledge.store import KnowledgeStore
@@ -44,7 +44,7 @@ class ToolRunner:
             if call.name == "read_file":
                 path = os.path.abspath(str(call.args["path"]))
                 self._assert_within_workspace(path)
-                with open(path, "r", encoding="utf-8", errors="replace") as f:
+                with open(path, encoding="utf-8", errors="replace") as f:
                     return ToolResult(name=call.name, ok=True, output=f.read())
 
             if call.name == "write_file":

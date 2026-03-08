@@ -1,10 +1,11 @@
-from typing import List, Optional
 import queue
 import time
-from evo_swarm.core.scheduler.scheduler import Scheduler
-from evo_swarm.core.interfaces.agent import Agent
-from evo_swarm.core.events import Event
+
 from rich.console import Console
+
+from evo_swarm.core.events import Event
+from evo_swarm.core.interfaces.agent import Agent
+from evo_swarm.core.scheduler.scheduler import Scheduler
 
 console = Console()
 
@@ -13,7 +14,7 @@ class LocalEventScheduler(Scheduler):
     A simple single-threaded loop that routes events between agents.
     """
     def __init__(self):
-        self.agents: List[Agent] = []
+        self.agents: list[Agent] = []
         self.event_queue = queue.Queue()
         self.running = False
 

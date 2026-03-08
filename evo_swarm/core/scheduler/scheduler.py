@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import List
+
 from evo_swarm.core.interfaces.agent import Agent
+
 
 class Scheduler(ABC):
     """

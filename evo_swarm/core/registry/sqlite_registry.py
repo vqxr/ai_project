@@ -1,7 +1,6 @@
-import sqlite3
 import json
-import os
-from typing import List, Optional
+import sqlite3
+
 from evo_swarm.core.genomes import Candidate, Genome
 from evo_swarm.core.registry.registry import Registry
 
@@ -87,7 +86,7 @@ class SqliteRegistry(Registry):
 
         self._conn.commit()
 
-    def get_candidate(self, candidate_id: str) -> Optional[Candidate]:
+    def get_candidate(self, candidate_id: str) -> Candidate | None:
         cursor = self._conn.cursor()
         row = cursor.execute(
             "SELECT * FROM candidates WHERE id = ?", (candidate_id,)
@@ -97,14 +96,14 @@ class SqliteRegistry(Registry):
             return None
         return self._row_to_candidate(row)
 
-    def get_generation(self, generation_id: int) -> List[Candidate]:
+    def get_generation(self, generation_id: int) -> list[Candidate]:
         cursor = self._conn.cursor()
         rows = cursor.execute(
             "SELECT * FROM candidates WHERE generation = ?", (generation_id,)
         ).fetchall()
         return [self._row_to_candidate(r) for r in rows]
 
-    def get_best_candidates(self, limit: int = 5) -> List[Candidate]:
+    def get_best_candidates(self, limit: int = 5) -> list[Candidate]:
         cursor = self._conn.cursor()
         rows = cursor.execute(
             """
@@ -118,14 +117,14 @@ class SqliteRegistry(Registry):
         ).fetchall()
         return [self._row_to_candidate(r) for r in rows]
 
-    def get_lineage_tree(self, candidate_id: str) -> List[Candidate]:
+    def get_lineage_tree(self, candidate_id: str) -> list[Candidate]:
         """
         Walk the lineage table upward and return the full ancestry chain
         (ordered from the given candidate back to the root).
         """
-        chain: List[Candidate] = []
+        chain: list[Candidate] = []
         visited = set()
-        current_id = candidate_id
+        current_id: str | None = candidate_id
 
         while current_id and current_id not in visited:
             visited.add(current_id)

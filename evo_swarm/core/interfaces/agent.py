@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import List, Callable
+from collections.abc import Callable
+
 from evo_swarm.core.events import Event
+
 
 class Agent(ABC):
     """
@@ -9,7 +11,7 @@ class Agent(ABC):
     """
     def __init__(self, name: str):
         self.name = name
-        self.event_bus = None # Will be injected by the scheduler/runner
+        self.event_bus: Callable[[Event], None] | None = None # Will be injected by the scheduler/runner
         
     def set_event_bus(self, commit_event: Callable[[Event], None]):
         """Inject a callback to allow the agent to publish events."""

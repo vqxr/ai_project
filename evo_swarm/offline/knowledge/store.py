@@ -3,8 +3,10 @@ from __future__ import annotations
 import hashlib
 import os
 import sqlite3
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Iterable, Optional
+
+from evo_swarm.offline.training.store import TrainingStore
 
 
 @dataclass(frozen=True)
@@ -32,8 +34,6 @@ class KnowledgeStore:
         self._conn = sqlite3.connect(db_path)
         self._conn.row_factory = sqlite3.Row
         self._init_schema()
-        # Lazy import to avoid circular deps.
-        from evo_swarm.offline.training.store import TrainingStore
         self.training = TrainingStore(self._conn)
 
     def _init_schema(self) -> None:
@@ -94,7 +94,7 @@ class KnowledgeStore:
         cur.execute("DELETE FROM chunks_fts WHERE doc_id = ?", (doc_id,))
 
         for offset, text in chunks:
-            chunk_id = hashlib.sha256(f"{doc_id}:{offset}".encode("utf-8")).hexdigest()[:24]
+            chunk_id = hashlib.sha256(f"{doc_id}:{offset}".encode()).hexdigest()[:24]
             cur.execute(
                 "INSERT INTO chunks (chunk_id, doc_id, offset, text) VALUES (?, ?, ?, ?)",
                 (chunk_id, doc_id, offset, text),
@@ -146,7 +146,7 @@ class KnowledgeStore:
             for r in rows
         ]
 
-    def get_document_path(self, doc_id: str) -> Optional[str]:
+    def get_document_path(self, doc_id: str) -> str | None:
         row = self._conn.cursor().execute(
             "SELECT path FROM documents WHERE doc_id = ?", (doc_id,)
         ).fetchone()
@@ -163,4 +163,4 @@ def sha256_file(path: str) -> str:
 
 def is_probably_text_file(path: str) -> bool:
     _, ext = os.path.splitext(path.lower())
-    return ext in {".txt", ".md", ".rst", ".tex"}
+    return ext in {".txt", ".md", ".rst", ".tex", ".pdf"}

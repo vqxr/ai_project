@@ -1,0 +1,8 @@
+{
+  "typeCheckingMode": "basic",
+  "pythonVersion": "3.11",
+  "venvPath": ".",
+  "venv": "venv",
+  "include": ["evo_swarm", "ai", "main.py"],
+  "exclude": ["**/__pycache__", "**/venv", "**/.venv", "**/.git", "**/*.pyc"]
+}

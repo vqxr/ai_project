@@ -7,28 +7,28 @@ import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 
 @dataclass(frozen=True)
 class TrainOutcome:
     ok: bool
-    metrics: Dict[str, Any]
-    artifacts: Dict[str, str]
+    metrics: dict[str, Any]
+    artifacts: dict[str, str]
     message: str = ""
 
 
 class TrainBackend:
     name: str
 
-    def train(self, *, candidate_id: str, genome: Dict[str, Any], generation: int) -> TrainOutcome:  # pragma: no cover
+    def train(self, *, candidate_id: str, genome: dict[str, Any], generation: int) -> TrainOutcome:  # pragma: no cover
         raise NotImplementedError
 
 
 class MockTrainBackend(TrainBackend):
     name = "mock"
 
-    def train(self, *, candidate_id: str, genome: Dict[str, Any], generation: int) -> TrainOutcome:
+    def train(self, *, candidate_id: str, genome: dict[str, Any], generation: int) -> TrainOutcome:
         # Keep deterministic-ish behavior out of the core loop for now; the evaluator can add noise.
         # This backend is intentionally fast and dependency-free.
         lr = float(genome.get("learning_rate", 1e-3))
@@ -65,7 +65,7 @@ class LocalLLMTrainBackend(TrainBackend):
         self.eval_every = int(eval_every)
         self.save_every = int(save_every)
 
-    def _read_last_val_loss(self, metrics_path: Path) -> Optional[float]:
+    def _read_last_val_loss(self, metrics_path: Path) -> float | None:
         if not metrics_path.exists():
             return None
         last = None
@@ -85,7 +85,7 @@ class LocalLLMTrainBackend(TrainBackend):
         except (TypeError, ValueError):
             return None
 
-    def train(self, *, candidate_id: str, genome: Dict[str, Any], generation: int) -> TrainOutcome:
+    def train(self, *, candidate_id: str, genome: dict[str, Any], generation: int) -> TrainOutcome:
         train_script = self.repo_root / "ai" / "local_llm" / "scripts" / "train.py"
         if not train_script.exists():
             return TrainOutcome(ok=False, metrics={}, artifacts={}, message=f"missing train script: {train_script}")
@@ -139,7 +139,7 @@ class LocalLLMTrainBackend(TrainBackend):
             return TrainOutcome(ok=False, metrics={}, artifacts={}, message=f"failed to spawn trainer: {e}")
 
         val_loss = self._read_last_val_loss(run_dir / "metrics.jsonl")
-        metrics: Dict[str, Any] = {
+        metrics: dict[str, Any] = {
             "backend": self.name,
             "seconds": time.time() - t0,
             "val_loss": val_loss,

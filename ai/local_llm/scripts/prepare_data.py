@@ -1,17 +1,16 @@
 import argparse
-import os
 import random
 import re
 from pathlib import Path
 
 import numpy as np
-from tqdm import tqdm
 from tokenizers import Tokenizer
+from tokenizers.decoders import ByteLevel as ByteLevelDecoder
 from tokenizers.models import BPE
 from tokenizers.normalizers import NFKC, Sequence
 from tokenizers.pre_tokenizers import ByteLevel
 from tokenizers.trainers import BpeTrainer
-from tokenizers.decoders import ByteLevel as ByteLevelDecoder
+from tqdm import tqdm
 
 
 def _iter_text_files(text_dir: Path):

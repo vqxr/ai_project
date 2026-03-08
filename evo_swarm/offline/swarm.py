@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-import os
+import time
+import uuid
 from dataclasses import dataclass
 
 from rich.console import Console
@@ -9,11 +10,7 @@ from evo_swarm.offline.config import OfflineSwarmConfig
 from evo_swarm.offline.knowledge.ingest import ingest_path
 from evo_swarm.offline.knowledge.store import KnowledgeStore
 from evo_swarm.offline.llm.base import EchoLLM, LocalLLM
-import time
-import uuid
-
 from evo_swarm.offline.tools import ToolCall, ToolRunner
-
 
 console = Console()
 

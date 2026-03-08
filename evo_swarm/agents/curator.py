@@ -1,5 +1,6 @@
-from evo_swarm.core.interfaces.agent import Agent
 from evo_swarm.core.events import Event, EventType
+from evo_swarm.core.interfaces.agent import Agent
+
 
 class CuratorAgent(Agent):
     """
@@ -16,9 +17,9 @@ class CuratorAgent(Agent):
 
     def trigger_new_generation(self, generation: int):
         """Called externally (e.g., by main runner) to kick off a loop."""
-        print(f"\n=========================================")
+        print("\n=========================================")
         print(f"[{self.name}] Initiating Generation {generation}")
-        print(f"=========================================\n")
+        print("=========================================\n")
         
         update_event = Event(
             event_type=EventType.DATASET_UPDATE,

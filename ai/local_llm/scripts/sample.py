@@ -2,9 +2,8 @@ import argparse
 from pathlib import Path
 
 import torch
-from tokenizers import Tokenizer
-
 from model import GPT, GPTConfig
+from tokenizers import Tokenizer
 
 
 def pick_device():

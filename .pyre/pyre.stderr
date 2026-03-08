@@ -1,0 +1,64 @@
+2026-03-08 13:20:17,898 [PID 13143] INFO No binary specified, looking for `pyre.bin` in PATH
+2026-03-08 13:20:17,899 [PID 13143] INFO Pyre binary is located at `/Users/abdurrahman/ai_project/venv/bin/pyre.bin`
+2026-03-08 13:20:17,899 [PID 13143] ERROR Invalid configuration: Cannot find any source files to analyze. Either `source_directories` or `targets` must be specified.
+2026-03-08 13:21:49,593 [PID 13245] INFO No binary specified, looking for `pyre.bin` in PATH
+2026-03-08 13:21:49,593 [PID 13245] INFO Pyre binary is located at `/Users/abdurrahman/ai_project/venv/bin/pyre.bin`
+2026-03-08 13:21:49,593 [PID 13245] ERROR Invalid configuration: Cannot find any source files to analyze. Either `source_directories` or `targets` must be specified.
+2026-03-08 13:21:57,930 [PID 13401] INFO No binary specified, looking for `pyre.bin` in PATH
+2026-03-08 13:21:57,930 [PID 13401] INFO Pyre binary is located at `/Users/abdurrahman/ai_project/venv/bin/pyre.bin`
+2026-03-08 13:21:57,931 [PID 13401] INFO Could not determine the number of Pyre workers from configuration. Auto-set the value to 4.
+2026-03-08 13:21:57,931 [PID 13401] INFO No typeshed specified, looking for it...
+2026-03-08 13:21:57,931 [PID 13401] INFO Found: `/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed`
+2026-03-08 13:21:57,931 [PID 13401] INFO Writing arguments into /var/folders/10/qnyyp9rd3lx04cp5n2j5qy2h0000gn/T/pyre_arguments_j_dn1yw9.json...
+2026-03-08 13:21:57,931 [PID 13401] DEBUG Arguments:
+{
+  "source_paths": {
+    "kind": "simple",
+    "paths": [
+      "/Users/abdurrahman/ai_project/evo_swarm"
+    ]
+  },
+  "search_paths": [
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stdlib",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/ExifRead",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/PyMySQL",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/PyYAML",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/aiofiles",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/chevron",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/colorama",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/ldap3",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/mysqlclient",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/paramiko",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/psycopg2",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/pycurl",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/python-dateutil",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/pytz",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/regex",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/requests",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/retry",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/tqdm",
+    "/Users/abdurrahman/ai_project/venv/lib/pyre_check/typeshed/stubs/ujson"
+  ],
+  "excludes": [],
+  "checked_directory_allowlist": [
+    "/Users/abdurrahman/ai_project/evo_swarm"
+  ],
+  "checked_directory_blocklist": [],
+  "extensions": [],
+  "log_path": "/Users/abdurrahman/ai_project/.pyre",
+  "global_root": "/Users/abdurrahman/ai_project",
+  "debug": false,
+  "python_version": {
+    "major": 3,
+    "minor": 14,
+    "micro": 2
+  },
+  "system_platform": "darwin",
+  "shared_memory": {},
+  "parallel": true,
+  "number_of_workers": 4,
+  "additional_logging_sections": [],
+  "show_error_traces": false,
+  "strict": false
+}
+2026-03-08 13:21:57,934 [PID 13401] ERROR [Errno 86] Bad CPU type in executable: '/Users/abdurrahman/ai_project/venv/bin/pyre.bin'

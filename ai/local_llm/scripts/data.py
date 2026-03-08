@@ -1,11 +1,11 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
 import torch
-import json
 
 
 @dataclass(frozen=True)
@@ -15,7 +15,7 @@ class MemmapDataset:
     length: int
 
     @staticmethod
-    def open(path: Path, meta_path: Path | None = None) -> "MemmapDataset":
+    def open(path: Path, meta_path: Path | None = None) -> MemmapDataset:
         dtype = None
         if meta_path is not None and meta_path.exists():
             meta = json.loads(meta_path.read_text(encoding="utf-8"))

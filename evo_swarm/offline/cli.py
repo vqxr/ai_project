@@ -2,9 +2,6 @@ from __future__ import annotations
 
 import argparse
 import os
-import sys
-import time
-import uuid
 
 from rich.console import Console
 
@@ -14,7 +11,6 @@ from evo_swarm.offline.llm.llama_cpp_server import LlamaCppServerLLM
 from evo_swarm.offline.swarm import OfflineSwarm
 from evo_swarm.offline.training.dataset import interactions_to_jsonl
 from evo_swarm.offline.training.trainer_mlx import train_with_mlx
-
 
 console = Console()
 
@@ -104,8 +100,8 @@ def main(argv: list[str] | None = None) -> int:
                         os.makedirs(train_out, exist_ok=True)
                         with open(dataset_path, "w", encoding="utf-8") as f:
                             f.write(jsonl)
-                        res = train_with_mlx(dataset_jsonl_path=dataset_path, out_dir=train_out)
-                        console.print(res.message)
+                        train_res = train_with_mlx(dataset_jsonl_path=dataset_path, out_dir=train_out)
+                        console.print(train_res.message)
             return 0
         if args.cmd == "export-dataset":
             interactions = swarm.store.training.iter_interactions(limit=int(args.limit))
@@ -122,9 +118,9 @@ def main(argv: list[str] | None = None) -> int:
             dataset_path = os.path.join(out_dir, "dataset.jsonl")
             with open(dataset_path, "w", encoding="utf-8") as f:
                 f.write(interactions_to_jsonl(interactions))
-            res = train_with_mlx(dataset_jsonl_path=dataset_path, out_dir=out_dir)
-            console.print(res.message)
-            return 0 if res.ok else 3
+            train_res = train_with_mlx(dataset_jsonl_path=dataset_path, out_dir=out_dir)
+            console.print(train_res.message)
+            return 0 if train_res.ok else 3
         raise SystemExit("unreachable")
     finally:
         swarm.close()

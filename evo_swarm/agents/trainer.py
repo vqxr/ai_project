@@ -1,8 +1,10 @@
-from evo_swarm.core.interfaces.agent import Agent
-from evo_swarm.core.events import Event, EventType
 import os
 import random
-from evo_swarm.training.backends import MockTrainBackend, TrainBackend, build_train_backend
+
+from evo_swarm.core.events import Event, EventType
+from evo_swarm.core.interfaces.agent import Agent
+from evo_swarm.training.backends import TrainBackend, build_train_backend
+
 
 class TrainerAgent(Agent):
     """
